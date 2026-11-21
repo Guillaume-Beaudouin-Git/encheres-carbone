@@ -104,7 +104,7 @@
       "last_auction": "2026-11-20"
     }
   },
-  "august_vs_july": {
+  "august_vs_july_pooled": {
     "2013": {
       "july_mt": 64.541,
       "august_mt": 29.5035,
@@ -218,20 +218,312 @@
       "ratio_per_auction": 0.9446
     }
   },
-  "august_vs_july_summary": {
+  "august_vs_july_by_platform": [
+    {
+      "year": 2013,
+      "zone": "DE",
+      "july_auctions": 4,
+      "august_auctions": 5,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2013,
+      "zone": "EU",
+      "july_auctions": 14,
+      "august_auctions": 11,
+      "ratio_median_auction": 0.5109
+    },
+    {
+      "year": 2014,
+      "zone": "DE",
+      "july_auctions": 4,
+      "august_auctions": 5,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2014,
+      "zone": "EU",
+      "july_auctions": 14,
+      "august_auctions": 12,
+      "ratio_median_auction": 0.4987
+    },
+    {
+      "year": 2015,
+      "zone": "DE",
+      "july_auctions": 5,
+      "august_auctions": 4,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2015,
+      "zone": "EU",
+      "july_auctions": 13,
+      "august_auctions": 12,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2016,
+      "zone": "DE",
+      "july_auctions": 5,
+      "august_auctions": 4,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2016,
+      "zone": "EU",
+      "july_auctions": 12,
+      "august_auctions": 8,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2016,
+      "zone": "PL",
+      "july_auctions": 1,
+      "august_auctions": 1,
+      "ratio_median_auction": 0.6
+    },
+    {
+      "year": 2017,
+      "zone": "DE",
+      "july_auctions": 4,
+      "august_auctions": 4,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2017,
+      "zone": "EU",
+      "july_auctions": 13,
+      "august_auctions": 12,
+      "ratio_median_auction": 0.5002
+    },
+    {
+      "year": 2017,
+      "zone": "PL",
+      "july_auctions": 2,
+      "august_auctions": 3,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2018,
+      "zone": "DE",
+      "july_auctions": 4,
+      "august_auctions": 5,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2018,
+      "zone": "EU",
+      "july_auctions": 14,
+      "august_auctions": 12,
+      "ratio_median_auction": 0.4994
+    },
+    {
+      "year": 2018,
+      "zone": "PL",
+      "july_auctions": 2,
+      "august_auctions": 2,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2019,
+      "zone": "DE",
+      "july_auctions": 4,
+      "august_auctions": 5,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2019,
+      "zone": "EU",
+      "july_auctions": 14,
+      "august_auctions": 12,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2019,
+      "zone": "PL",
+      "july_auctions": 3,
+      "august_auctions": 2,
+      "ratio_median_auction": 0.5001
+    },
+    {
+      "year": 2020,
+      "zone": "DE",
+      "july_auctions": 5,
+      "august_auctions": 4,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2020,
+      "zone": "EU",
+      "july_auctions": 13,
+      "august_auctions": 12,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2020,
+      "zone": "PL",
+      "july_auctions": 3,
+      "august_auctions": 2,
+      "ratio_median_auction": 0.5002
+    },
+    {
+      "year": 2021,
+      "zone": "DE",
+      "july_auctions": 5,
+      "august_auctions": 4,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2021,
+      "zone": "EU",
+      "july_auctions": 13,
+      "august_auctions": 13,
+      "ratio_median_auction": 0.5001
+    },
+    {
+      "year": 2021,
+      "zone": "PL",
+      "july_auctions": 4,
+      "august_auctions": 4,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2022,
+      "zone": "DE",
+      "july_auctions": 5,
+      "august_auctions": 4,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2022,
+      "zone": "EU",
+      "july_auctions": 12,
+      "august_auctions": 14,
+      "ratio_median_auction": 0.4995
+    },
+    {
+      "year": 2022,
+      "zone": "PL",
+      "july_auctions": 2,
+      "august_auctions": 3,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2023,
+      "zone": "DE",
+      "july_auctions": 4,
+      "august_auctions": 4,
+      "ratio_median_auction": 0.5001
+    },
+    {
+      "year": 2023,
+      "zone": "EU",
+      "july_auctions": 13,
+      "august_auctions": 14,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2023,
+      "zone": "PL",
+      "july_auctions": 2,
+      "august_auctions": 3,
+      "ratio_median_auction": 0.5
+    },
+    {
+      "year": 2024,
+      "zone": "DE",
+      "july_auctions": 4,
+      "august_auctions": 5,
+      "ratio_median_auction": 1.0
+    },
+    {
+      "year": 2024,
+      "zone": "EU",
+      "july_auctions": 14,
+      "august_auctions": 13,
+      "ratio_median_auction": 1.0
+    },
+    {
+      "year": 2024,
+      "zone": "PL",
+      "july_auctions": 3,
+      "august_auctions": 2,
+      "ratio_median_auction": 1.0008
+    },
+    {
+      "year": 2025,
+      "zone": "DE",
+      "july_auctions": 4,
+      "august_auctions": 5,
+      "ratio_median_auction": 1.0
+    },
+    {
+      "year": 2025,
+      "zone": "EU",
+      "july_auctions": 14,
+      "august_auctions": 12,
+      "ratio_median_auction": 1.0
+    },
+    {
+      "year": 2025,
+      "zone": "PL",
+      "july_auctions": 2,
+      "august_auctions": 2,
+      "ratio_median_auction": 0.9992
+    },
+    {
+      "year": 2026,
+      "zone": "DE",
+      "july_auctions": 5,
+      "august_auctions": 4,
+      "ratio_median_auction": 1.0
+    },
+    {
+      "year": 2026,
+      "zone": "EU",
+      "july_auctions": 13,
+      "august_auctions": 13,
+      "ratio_median_auction": 1.0
+    },
+    {
+      "year": 2026,
+      "zone": "PL",
+      "july_auctions": 2,
+      "august_auctions": 2,
+      "ratio_median_auction": 1.0004
+    }
+  ],
+  "august_vs_july_by_platform_summary": {
     "2013-2023": {
-      "ratio_per_auction_median": 0.5078,
-      "ratio_per_auction_min": 0.4816,
-      "ratio_per_auction_max": 0.5345,
-      "ratio_total_min": 0.3705,
-      "ratio_total_max": 0.5657
+      "platform_years": 30,
+      "ratio_rounded_counts": {
+        "0.50": 28,
+        "0.51": 1,
+        "0.60": 1
+      },
+      "exceptions_to_0_50": [
+        {
+          "year": 2013,
+          "zone": "EU",
+          "ratio": 0.5109,
+          "july_auctions": 14,
+          "august_auctions": 11
+        },
+        {
+          "year": 2016,
+          "zone": "PL",
+          "ratio": 0.6,
+          "july_auctions": 1,
+          "august_auctions": 1
+        }
+      ]
     },
     "2024-2026": {
-      "ratio_per_auction_median": 0.9609,
-      "ratio_per_auction_min": 0.9446,
-      "ratio_per_auction_max": 0.9848,
-      "ratio_total_min": 0.8974,
-      "ratio_total_max": 0.9379
+      "platform_years": 9,
+      "ratio_rounded_counts": {
+        "1.00": 9
+      },
+      "exceptions_to_1_00": []
     }
   },
   "change_2013_2014": {

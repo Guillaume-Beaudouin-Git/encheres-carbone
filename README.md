@@ -20,7 +20,7 @@ its "Date" cell and maps every spelling of a column to one name.
 |---|---|
 | Rows read from the 15 files (2012-2026) | 3,044 |
 | Phase-2 EUAs (contract `T2PA`), 3 January 2012 to 25 April 2013 | −64 |
-| Aviation allowances (1 `EAA2`, 81 `EAA3`) | −82 |
+| Aviation allowances (1 `EAA2`, 81 `EAA3`, the last on 11 December 2024). Since January 2025, aviation allowances are sold within the EUA auctions ([EEX customer information, 31 July 2024](https://eex.com/fileadmin/Global/News/EEX/EEX_Customer_Information/2024/20240731_CI_Auction_Calendar_revised_2024_and_2025.pdf)) | −82 |
 | Cancelled auctions (17 March 2020, 1 February 2022, 2 March 2022) | −3 |
 | Phase-3 EUAs auctioned in 2012, before phase 3 began | −19 |
 | Missing prices or volumes, duplicates | 0 |
@@ -43,10 +43,12 @@ recomputed as total bids / volume and matches EEX's rounded figure on every row 
 
 ![Volume auctioned per month on EEX, January 2013 to November 2026](figures/Q1_monthly_volume.png)
 
-- **August.** From 2013 to 2023, an August auction offers 0.48 to 0.53 times the volume of a July auction (median
-  0.51). From 2024 the halving is gone: 0.94 to 0.98. The data show the change but not its cause; the Auctioning
-  Regulation was recast in October 2023 ([Regulation (EU) 2023/2830](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023R2830)),
-  and whether that is the reason was not checked here.
+- **August.** On each platform, an August auction offered half the volume of a July auction from 2013 to 2023 and
+  the same volume from 2024. The ratio of the median August auction to the median July auction is 0.50 in 28 of the
+  30 platform-years of 2013-2023 (0.51 on the common platform in 2013; 0.60 for Poland in 2016, with one auction in
+  each month) and 1.00 in all 9 platform-years of 2024-2026. Regulation (EU) No 1031/2010 halved August volumes on
+  the common auction platform ([Art. 8(5)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32010R1031)); Delegated Regulation (EU) 2023/2830, in force since
+  21 December 2023, spreads them evenly over the year ([Art. 8(5)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023R2830)).
 - **2014.** The volume falls by 35.2% from 2013: the years 2014 to 2016 are those of "backloading", when the
   European Commission withheld allowances from the auctions
   ([Commission page](https://climate.ec.europa.eu/eu-action/carbon-markets/eu-emissions-trading-system-eu-ets/market-stability-reserve_en)).
@@ -80,20 +82,19 @@ recomputed as total bids / volume and matches EEX's rounded figure on every row 
   peaks at 5.20 in 2014, the full year with the smallest volume offered, and falls to 1.57 in 2026, when 35.5% of
   auctions receive bids for less than 1.5 times the volume offered. The ratio divides by the volume offered: the
   same bids give a higher ratio when less is offered.
-- **Bidders.** Between 16.5 (2014) and 25.2 (2018) bidders per auction on average; 23.2 in 2026. More bidders do
-  not mean a higher cover: auction by auction, the rank correlation between the two is −0.36.
+- **Bidders.** Between 16.5 (2014) and 25.2 (2018) bidders per auction on average; 23.2 in 2026.
 - **Price − mean bid.** Bids above the clearing price are filled and bids below it are rejected, so a mean bid
   far below the clearing price means many low bids: wide dispersion. The median over all auctions is 0.49% of the
-  price, and the spread is larger when the cover is higher (rank correlation 0.62). EEX's mean includes erroneous
+  price, and the spread is larger when the cover is higher (rank correlation 0.62), partly by construction. EEX's mean includes erroneous
   bids: on 11 June 2024 one maximum bid of 7,075 EUR/t lifts the mean bid to 137.30 EUR/t for a clearing price of
   70.31 EUR/t. That is why the yearly figure is a median.
 
-The figure `figures/Q2_demand_by_year.png` shows every auction's cover ratio and the bidders by year.
+![Cover ratio of every auction and bidders by year, 2013-2026](figures/Q2_demand_by_year.png)
 
 ## 3. Does the cover ratio announce the next price moves?
 
-**Design, fixed and committed before the 2021-2026 results were computed** (see the first commit and
-`src/eua_auctions/cover_signal.py`):
+**Design, committed in `ce81313`, before the results commit `87593fa`** (see
+`src/eua_auctions/cover_signal.py`, unchanged since):
 
 - Signal: the rank of an auction's cover ratio among the previous 60 auctions. The median cover falls from 5.20
   (2014) to 1.76 (2020) inside the training years, so fixed thresholds on the raw ratio would mostly sort auctions
@@ -141,6 +142,9 @@ auction.
 - **The cover ratio is relative to the volume offered**, which policy sets. The rank against the previous 60 auctions
   removes slow changes, not the gap between platforms: on 2014-2020 the median cover is 2.49 on the common
   platform and 2.10 for Poland.
+- **The cover rank also tracks the volume offered:** August auctions are 29% of the high-cover bucket of the
+  chosen variant (9% of all auctions, 2014-2026); on 2021-2026, German auctions are 56% of it (21% of all). This
+  was measured after the test, as a description (`results/cover_signal.json`).
 - **Causes are not separated.** The changes in volume are described, not decomposed into reserve intake,
   backloading or other policy decisions.
 - **2026 is partial**, and the 2026 file grows after each auction: the window stops at 20 November 2026.
@@ -173,9 +177,10 @@ The numbers are written to `results/` and the figures to `figures/`.
 ## Data and terms of use
 
 The data are EEX's "EUA Emission Spot Primary Market Auction Report" files, published on the
-[EEX auctions page](https://www.eex.com/en/markets/environmental-markets/eu-ets-auctions). They are not
-redistributed here: `data/` is not versioned, and `scripts/download.py` fetches them from EEX. `results/` holds
-only figures computed from them. Use of the data is subject to EEX's terms.
+[EEX auctions page](https://www.eex.com/en/markets/environmental-markets/eu-ets-auctions). © EEX AG. Files downloaded
+on 21 November 2026, not redistributed: `data/` is not versioned, and `scripts/download.py` fetches them from EEX.
+Only aggregates and charts computed from them are published, for non-commercial research. EEX's terms:
+https://www.eex.com/en/legal-information/disclaimer.
 
 ## How this project was built
 

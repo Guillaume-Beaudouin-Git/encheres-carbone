@@ -11,7 +11,7 @@ import pandas as pd
 
 from eua_auctions import style
 from eua_auctions.data import END, load
-from eua_auctions.supply import annual_volume, august_vs_july, change, monthly_volume
+from eua_auctions.supply import annual_volume, august_vs_july, august_vs_july_by_platform, change, monthly_volume
 
 FIGURES, RESULTS = Path("figures"), Path("results")
 
@@ -29,6 +29,7 @@ def main() -> None:
     monthly = monthly_volume(df)
     annual = annual_volume(df)
     aug = august_vs_july(df)
+    by_platform = august_vs_july_by_platform(df)
     full_years = annual.loc[2013:2025]
 
     results = {
@@ -36,16 +37,21 @@ def main() -> None:
         "note": "2026 is a partial year: auctions up to the end of the window.",
         "annual": {int(y): {k: (round(float(v), 4) if not isinstance(v, str) else v) for k, v in r.items()}
                    for y, r in annual.iterrows()},
-        "august_vs_july": {int(y): {k: round(float(v), 4) for k, v in r.items()} for y, r in aug.iterrows()},
-        # the halving holds until 2023 and is gone from 2024: the two periods are summarised apart
-        "august_vs_july_summary": {
+        # all platforms pooled, per year (kept for reference; the README uses the per-platform ratio below)
+        "august_vs_july_pooled": {int(y): {k: round(float(v), 4) for k, v in r.items()} for y, r in aug.iterrows()},
+        # per platform: median August auction / median July auction
+        "august_vs_july_by_platform": [{k: (round(float(v), 4) if k == "ratio_median_auction" else v)
+                                        for k, v in r.items()} for r in by_platform.to_dict(orient="records")],
+        "august_vs_july_by_platform_summary": {
             f"{a}-{b}": {
-                "ratio_per_auction_median": round(float(aug.loc[a:b, "ratio_per_auction"].median()), 4),
-                "ratio_per_auction_min": round(float(aug.loc[a:b, "ratio_per_auction"].min()), 4),
-                "ratio_per_auction_max": round(float(aug.loc[a:b, "ratio_per_auction"].max()), 4),
-                "ratio_total_min": round(float(aug.loc[a:b, "ratio_total"].min()), 4),
-                "ratio_total_max": round(float(aug.loc[a:b, "ratio_total"].max()), 4),
+                "platform_years": int(len(p)),
+                "ratio_rounded_counts": {f"{r:.2f}": int(n) for r, n in p["ratio_median_auction"].round(2).value_counts().sort_index().items()},
+                "exceptions_to_0_50" if b <= 2023 else "exceptions_to_1_00": [
+                    {"year": int(r.year), "zone": r.zone, "ratio": round(float(r.ratio_median_auction), 4),
+                     "july_auctions": int(r.july_auctions), "august_auctions": int(r.august_auctions)}
+                    for r in p.itertuples() if round(r.ratio_median_auction, 2) != (0.5 if b <= 2023 else 1.0)],
             } for a, b in [(2013, 2023), (2024, 2026)]
+            for p in [by_platform[(by_platform["year"] >= a) & (by_platform["year"] <= b)]]
         },
         **{f"change_{a}_{b}": _rounded(change(annual, a, b)) for a, b in [(2013, 2014), (2018, 2019), (2020, 2021)]},
         "full_years_2013_2025": {
@@ -72,15 +78,16 @@ def main() -> None:
     ax.set_ylabel("Volume auctioned on EEX (Mt of EUA)")
     ax.set_ylim(0, top * 1.24)
     ax.set_title("EUA primary auctions on EEX: volume per month, Jan 2013 - Nov 2026")
-    ax.text(0, -0.13, f"Source: EEX auction reports. General allowances only (no aviation). "
+    ax.text(0, -0.17, "Source: EEX auction reports. General allowances only (no aviation auctions); since January 2025, "
+            "aviation allowances are sold\nwithin the EUA auctions. "
             f"November 2026: auctions up to {pd.Timestamp(END).day} November.",
             transform=ax.transAxes, fontsize=8, color=style.INK_2)
     fig.savefig(FIGURES / "Q1_monthly_volume.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
 
     print(annual.round(2).to_string())
-    print(aug.round(3).to_string())
-    print(json.dumps({k: results[k] for k in ["august_vs_july_summary", "change_2013_2014", "change_2018_2019",
+    print(by_platform.round(4).to_string())
+    print(json.dumps({k: results[k] for k in ["august_vs_july_by_platform_summary", "change_2013_2014", "change_2018_2019",
                                                "change_2020_2021", "full_years_2013_2025"]}, indent=1))
 
 

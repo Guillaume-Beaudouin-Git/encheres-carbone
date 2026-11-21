@@ -46,6 +46,22 @@ def august_vs_july(df: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows).set_index("year")
 
 
+def august_vs_july_by_platform(df: pd.DataFrame) -> pd.DataFrame:
+    """Per year and platform: volume of the median August auction / volume of the median July auction.
+
+    Each platform has its own auction size, so pooling platforms blurs the ratio. The median, not the mean,
+    because each platform holds a few auctions with a deviating volume (for instance the last auction of a
+    period), which move the mean of a month with a dozen auctions or fewer."""
+    rows = []
+    for (year, zone), d in df.groupby(["year", "zone"]):
+        jul, aug = d[d["date"].dt.month == 7], d[d["date"].dt.month == 8]
+        if jul.empty or aug.empty:
+            continue
+        rows.append({"year": int(year), "zone": zone, "july_auctions": len(jul), "august_auctions": len(aug),
+                     "ratio_median_auction": aug["volume"].median() / jul["volume"].median()})
+    return pd.DataFrame(rows)
+
+
 def change(annual: pd.DataFrame, before: int, after: int) -> dict:
     """Change in total volume and in volume per auction from one full year to another."""
     a, b = annual.loc[before], annual.loc[after]

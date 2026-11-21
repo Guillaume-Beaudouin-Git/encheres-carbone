@@ -132,6 +132,32 @@
       ]
     }
   },
+  "post_hoc_high_bucket_composition": {
+    "2014-2020": {
+      "n_high": 163,
+      "n_all": 1396,
+      "august_share_high_pct": 28.8344,
+      "august_share_all_pct": 8.6676,
+      "germany_share_high_pct": 20.8589,
+      "germany_share_all_pct": 22.7794
+    },
+    "2021-2026": {
+      "n_high": 149,
+      "n_all": 1276,
+      "august_share_high_pct": 28.8591,
+      "august_share_all_pct": 9.4828,
+      "germany_share_high_pct": 55.7047,
+      "germany_share_all_pct": 21.2382
+    },
+    "2014-2026": {
+      "n_high": 312,
+      "n_all": 2672,
+      "august_share_high_pct": 28.8462,
+      "august_share_all_pct": 9.0569,
+      "germany_share_high_pct": 37.5,
+      "germany_share_all_pct": 22.0434
+    }
+  },
   "train_grid": [
     {
       "k": 1,

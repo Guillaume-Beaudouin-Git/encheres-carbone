@@ -23,6 +23,7 @@ def main() -> None:
     yearly = yearly_demand(df)
     d = add_spread(df)
     outliers = d[d["mean_bid"] > 1.05 * d["price"]]
+    within = {int(y): round(rank_correlation(g, "cover", "n_bidders"), 4) for y, g in df.groupby("year")}
 
     results = {
         "yearly": {int(y): {k: round(float(v), 4) for k, v in r.items()} for y, r in yearly.iterrows()},
@@ -32,7 +33,14 @@ def main() -> None:
             "cover_max": round(float(df["cover"].max()), 4),
             "spread_median_pct": round(float(d["spread_pct"].median()), 4),
             "spearman_cover_spread": round(rank_correlation(df, "cover", "spread_pct"), 4),
-            "spearman_cover_bidders": round(rank_correlation(df, "cover", "n_bidders"), 4),
+        },
+        # not in the README: pooled over all years this correlation is negative, but within a year it is
+        # positive in most years (Simpson's paradox: both series trend in opposite directions across years)
+        "spearman_cover_bidders": {
+            "pooled": round(rank_correlation(df, "cover", "n_bidders"), 4),
+            "within_year": within,
+            "years_positive": sum(v > 0 for v in within.values()),
+            "years": len(within),
         },
         "mean_bid_above_price_by_5pct": {
             "count": int(len(outliers)),

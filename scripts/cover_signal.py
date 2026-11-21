@@ -8,6 +8,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 from eua_auctions import style
 from eua_auctions.cover_signal import (HORIZONS, QUANTILES, TEST, TRAIN, WINDOW, bucket_test, forecast_comparison,
@@ -50,6 +51,26 @@ def main() -> None:
     test_grid = grid(df, *TEST)
 
     tr_sample = sample(df, *TRAIN, k, q)
+
+    # 5. Post hoc, descriptive only (added after an audit, not part of the design): which auctions fall in the
+    #    high-cover bucket of the chosen variant? A share far above the share in all auctions means the rank
+    #    also sorts auctions by the volume they offer (half-size August auctions, smaller German auctions).
+    after_2013 = df[df["date"] >= TRAIN[0]]
+    assert not after_2013["date"].duplicated().any()  # one auction per day from 2014: dates identify auctions
+    zone = after_2013.set_index("date")["zone"]
+    composition = {}
+    for name, period in [("2014-2020", TRAIN), ("2021-2026", TEST), ("2014-2026", None)]:
+        s = (sample(df, *period, k, q) if period else
+             pd.concat([sample(df, *TRAIN, k, q), sample(df, *TEST, k, q)], ignore_index=True))
+        s["zone"], s["august"] = s["date"].map(zone), s["date"].dt.month == 8
+        high = s[s["bucket"] == "high"]
+        composition[name] = {
+            "n_high": int(len(high)), "n_all": int(len(s)),
+            "august_share_high_pct": 100 * float(high["august"].mean()),
+            "august_share_all_pct": 100 * float(s["august"].mean()),
+            "germany_share_high_pct": 100 * float((high["zone"] == "DE").mean()),
+            "germany_share_all_pct": 100 * float((s["zone"] == "DE").mean()),
+        }
     results = {
         "design": {
             "window_auctions": WINDOW, "horizons_k": list(HORIZONS), "quantiles_q": list(QUANTILES),
@@ -68,6 +89,7 @@ def main() -> None:
         "test_chosen": test,
         "forecast_test": forecast,
         "robustness_skip_one": {"train": robust_train, "test": robust_test},
+        "post_hoc_high_bucket_composition": composition,
         "train_grid": train_grid.to_dict(orient="records"),
         "test_grid_for_transparency": test_grid.to_dict(orient="records"),
     }
@@ -102,6 +124,7 @@ def main() -> None:
     print("Test:", json.dumps(_round(test), indent=1))
     print("Forecast:", json.dumps(_round(forecast), indent=1))
     print("Robustness (skip one):", json.dumps(_round({"train": robust_train, "test": robust_test}), indent=1))
+    print("Post hoc composition of the high-cover bucket:", json.dumps(_round(composition), indent=1))
     print("Test grid (transparency):")
     print(test_grid.round(3).to_string())
 

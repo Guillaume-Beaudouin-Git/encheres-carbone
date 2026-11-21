@@ -6,6 +6,20 @@
     "T2PA": 64,
     "EAA2": 1
   },
+  "dropped_contract_first_last_date": {
+    "EAA2": [
+      "2012-10-31",
+      "2012-10-31"
+    ],
+    "EAA3": [
+      "2014-09-03",
+      "2024-12-11"
+    ],
+    "T2PA": [
+      "2012-01-03",
+      "2013-04-25"
+    ]
+  },
   "dropped_aviation_under_eua_code": 0,
   "dropped_cancelled": 3,
   "cancelled_dates": [
@@ -44,6 +58,24 @@
     "DE": 636,
     "PL": 285,
     "XI": 6
+  },
+  "years_by_zone": {
+    "DE": [
+      2013,
+      2026
+    ],
+    "EU": [
+      2013,
+      2026
+    ],
+    "PL": [
+      2013,
+      2026
+    ],
+    "XI": [
+      2022,
+      2026
+    ]
   },
   "window": [
     "2013-01-01",

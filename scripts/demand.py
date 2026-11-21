@@ -25,14 +25,14 @@ def main() -> None:
     outliers = d[d["mean_bid"] > 1.05 * d["price"]]
 
     results = {
-        "yearly": {int(y): {k: round(float(v), 3) for k, v in r.items()} for y, r in yearly.iterrows()},
+        "yearly": {int(y): {k: round(float(v), 4) for k, v in r.items()} for y, r in yearly.iterrows()},
         "all_auctions": {
-            "cover_median": round(float(df["cover"].median()), 3),
-            "cover_min": round(float(df["cover"].min()), 3),
-            "cover_max": round(float(df["cover"].max()), 3),
-            "spread_median_pct": round(float(d["spread_pct"].median()), 3),
-            "spearman_cover_spread": round(rank_correlation(df, "cover", "spread_pct"), 3),
-            "spearman_cover_bidders": round(rank_correlation(df, "cover", "n_bidders"), 3),
+            "cover_median": round(float(df["cover"].median()), 4),
+            "cover_min": round(float(df["cover"].min()), 4),
+            "cover_max": round(float(df["cover"].max()), 4),
+            "spread_median_pct": round(float(d["spread_pct"].median()), 4),
+            "spearman_cover_spread": round(rank_correlation(df, "cover", "spread_pct"), 4),
+            "spearman_cover_bidders": round(rank_correlation(df, "cover", "n_bidders"), 4),
         },
         "mean_bid_above_price_by_5pct": {
             "count": int(len(outliers)),

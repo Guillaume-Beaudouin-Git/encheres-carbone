@@ -56,7 +56,12 @@ def main() -> None:
             "train": list(TRAIN), "test": list(TEST), "hac_lags": "2k (Newey-West)",
             "selection": "largest |HAC t| of mean(high) - mean(low) on the training years",
             "variants_tried": len(HORIZONS) * len(QUANTILES) + 1,
+            "bonferroni_threshold_5pct_9_variants": 0.05 / (len(HORIZONS) * len(QUANTILES)),
         },
+        "train_cover_median_by_zone": {z: float(v) for z, v in
+                                       df[(df["date"] >= TRAIN[0]) & (df["date"] <= TRAIN[1])].groupby("zone")["cover"].median().items()},
+        "train_grid_max_abs_t": float(train_grid["t_hac"].abs().max()),
+        "train_grid_min_p": float(train_grid["p_hac"].min()),
         "chosen": chosen,
         "train_last_target_date": str(tr_sample["target_date"].max())[:10],
         "train_chosen": train,

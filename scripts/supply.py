@@ -17,7 +17,7 @@ FIGURES, RESULTS = Path("figures"), Path("results")
 
 
 def _rounded(d: dict) -> dict:
-    return {k: (round(float(v), 3) if isinstance(v, float) else [round(x, 3) for x in v] if isinstance(v, list) else v)
+    return {k: (round(float(v), 4) if isinstance(v, float) else [round(x, 4) for x in v] if isinstance(v, list) else v)
             for k, v in d.items()}
 
 
@@ -34,25 +34,25 @@ def main() -> None:
     results = {
         "window": [str(df["date"].min().date()), END],
         "note": "2026 is a partial year: auctions up to the end of the window.",
-        "annual": {int(y): {k: (round(float(v), 3) if not isinstance(v, str) else v) for k, v in r.items()}
+        "annual": {int(y): {k: (round(float(v), 4) if not isinstance(v, str) else v) for k, v in r.items()}
                    for y, r in annual.iterrows()},
-        "august_vs_july": {int(y): {k: round(float(v), 3) for k, v in r.items()} for y, r in aug.iterrows()},
+        "august_vs_july": {int(y): {k: round(float(v), 4) for k, v in r.items()} for y, r in aug.iterrows()},
         # the halving holds until 2023 and is gone from 2024: the two periods are summarised apart
         "august_vs_july_summary": {
             f"{a}-{b}": {
-                "ratio_per_auction_median": round(float(aug.loc[a:b, "ratio_per_auction"].median()), 3),
-                "ratio_per_auction_min": round(float(aug.loc[a:b, "ratio_per_auction"].min()), 3),
-                "ratio_per_auction_max": round(float(aug.loc[a:b, "ratio_per_auction"].max()), 3),
-                "ratio_total_min": round(float(aug.loc[a:b, "ratio_total"].min()), 3),
-                "ratio_total_max": round(float(aug.loc[a:b, "ratio_total"].max()), 3),
+                "ratio_per_auction_median": round(float(aug.loc[a:b, "ratio_per_auction"].median()), 4),
+                "ratio_per_auction_min": round(float(aug.loc[a:b, "ratio_per_auction"].min()), 4),
+                "ratio_per_auction_max": round(float(aug.loc[a:b, "ratio_per_auction"].max()), 4),
+                "ratio_total_min": round(float(aug.loc[a:b, "ratio_total"].min()), 4),
+                "ratio_total_max": round(float(aug.loc[a:b, "ratio_total"].max()), 4),
             } for a, b in [(2013, 2023), (2024, 2026)]
         },
         **{f"change_{a}_{b}": _rounded(change(annual, a, b)) for a, b in [(2013, 2014), (2018, 2019), (2020, 2021)]},
         "full_years_2013_2025": {
-            "largest_mt": [int(full_years["volume_mt"].idxmax()), round(float(full_years["volume_mt"].max()), 1)],
-            "smallest_mt": [int(full_years["volume_mt"].idxmin()), round(float(full_years["volume_mt"].min()), 1)],
+            "largest_mt": [int(full_years["volume_mt"].idxmax()), round(float(full_years["volume_mt"].max()), 4)],
+            "smallest_mt": [int(full_years["volume_mt"].idxmin()), round(float(full_years["volume_mt"].min()), 4)],
         },
-        "monthly_mt": {d.strftime("%Y-%m"): round(float(v), 3) for d, v in monthly.items()},
+        "monthly_mt": {d.strftime("%Y-%m"): round(float(v), 4) for d, v in monthly.items()},
     }
     (RESULTS / "supply.json").write_text(json.dumps(results, indent=2))
 

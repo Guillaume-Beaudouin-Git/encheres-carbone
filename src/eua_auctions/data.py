@@ -195,6 +195,9 @@ def clean(df: pd.DataFrame, start: str = START, end: str = END) -> tuple[pd.Data
 
     contracts = df["contract"].astype(str).str.strip()
     report["dropped_by_contract"] = {str(k): int(v) for k, v in contracts[contracts != EUA_CONTRACT].value_counts().items()}
+    report["dropped_contract_first_last_date"] = {
+        str(c): [g["date"].min().strftime("%Y-%m-%d"), g["date"].max().strftime("%Y-%m-%d")]
+        for c, g in df[contracts != EUA_CONTRACT].groupby(contracts[contracts != EUA_CONTRACT])}
     df = df[contracts == EUA_CONTRACT].copy()
 
     # aviation allowances must all carry an EAA code; check that none slipped through under T3PA
@@ -237,6 +240,7 @@ def clean(df: pd.DataFrame, start: str = START, end: str = END) -> tuple[pd.Data
     report["rows_kept"] = int(len(df))
     report["rows_kept_by_year"] = {int(k): int(v) for k, v in df["year"].value_counts().sort_index().items()}
     report["rows_kept_by_zone"] = {str(k): int(v) for k, v in df["zone"].value_counts().items()}
+    report["years_by_zone"] = {str(z): [int(g["year"].min()), int(g["year"].max())] for z, g in df.groupby("zone")}
     report["window"] = [start, end]
     report["same_day_auctions"] = int(df["date"].duplicated().sum())
     cols = ["datetime", "date", "year", "zone", "price", "min_bid", "max_bid", "mean_bid", "median_bid", "volume",

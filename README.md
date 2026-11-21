@@ -85,9 +85,9 @@ recomputed as total bids / volume and matches EEX's rounded figure on every row 
 - **Bidders.** Between 16.5 (2014) and 25.2 (2018) bidders per auction on average; 23.2 in 2026.
 - **Price − mean bid.** Bids above the clearing price are filled and bids below it are rejected, so a mean bid
   far below the clearing price means many low bids: wide dispersion. The median over all auctions is 0.49% of the
-  price, and the spread is larger when the cover is higher (rank correlation 0.62), partly by construction. EEX's mean includes erroneous
-  bids: on 11 June 2024 one maximum bid of 7,075 EUR/t lifts the mean bid to 137.30 EUR/t for a clearing price of
-  70.31 EUR/t. That is why the yearly figure is a median.
+  price, and the spread is larger when the cover is higher (rank correlation 0.62), partly by construction. EEX's
+  mean includes erroneous bids: on 11 June 2024 one maximum bid of 7,075 EUR/t lifts the mean bid to 137.30 EUR/t
+  for a clearing price of 70.31 EUR/t. That is why the yearly figure is a median.
 
 ![Cover ratio of every auction and bidders by year, 2013-2026](figures/Q2_demand_by_year.png)
 

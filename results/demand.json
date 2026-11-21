@@ -1,0 +1,185 @@
+{
+  "yearly": {
+    "2013": {
+      "auctions": 202.0,
+      "cover_median": 3.114,
+      "cover_q25": 2.431,
+      "cover_q75": 3.937,
+      "share_cover_below_1_5_pct": 0.99,
+      "bidders_mean": 18.277,
+      "successful_bidders_mean": 13.193,
+      "spread_median_pct": 3.837
+    },
+    "2014": {
+      "auctions": 194.0,
+      "cover_median": 5.199,
+      "cover_q25": 3.816,
+      "cover_q75": 6.987,
+      "share_cover_below_1_5_pct": 0.0,
+      "bidders_mean": 16.536,
+      "successful_bidders_mean": 11.33,
+      "spread_median_pct": 7.651
+    },
+    "2015": {
+      "auctions": 195.0,
+      "cover_median": 2.953,
+      "cover_q25": 2.516,
+      "cover_q75": 3.695,
+      "share_cover_below_1_5_pct": 0.0,
+      "bidders_mean": 17.892,
+      "successful_bidders_mean": 13.087,
+      "spread_median_pct": 0.271
+    },
+    "2016": {
+      "auctions": 187.0,
+      "cover_median": 2.268,
+      "cover_q25": 1.978,
+      "cover_q75": 2.59,
+      "share_cover_below_1_5_pct": 2.674,
+      "bidders_mean": 18.711,
+      "successful_bidders_mean": 13.144,
+      "spread_median_pct": 1.815
+    },
+    "2017": {
+      "auctions": 201.0,
+      "cover_median": 2.613,
+      "cover_q25": 2.364,
+      "cover_q75": 2.958,
+      "share_cover_below_1_5_pct": 0.498,
+      "bidders_mean": 20.836,
+      "successful_bidders_mean": 14.527,
+      "spread_median_pct": 2.963
+    },
+    "2018": {
+      "auctions": 203.0,
+      "cover_median": 2.494,
+      "cover_q25": 1.967,
+      "cover_q75": 3.179,
+      "share_cover_below_1_5_pct": 1.97,
+      "bidders_mean": 25.246,
+      "successful_bidders_mean": 17.803,
+      "spread_median_pct": 3.849
+    },
+    "2019": {
+      "auctions": 208.0,
+      "cover_median": 1.871,
+      "cover_q25": 1.654,
+      "cover_q75": 2.224,
+      "share_cover_below_1_5_pct": 7.692,
+      "bidders_mean": 23.812,
+      "successful_bidders_mean": 17.173,
+      "spread_median_pct": 0.37
+    },
+    "2020": {
+      "auctions": 209.0,
+      "cover_median": 1.759,
+      "cover_q25": 1.545,
+      "cover_q75": 2.013,
+      "share_cover_below_1_5_pct": 18.182,
+      "bidders_mean": 23.775,
+      "successful_bidders_mean": 17.574,
+      "spread_median_pct": -0.446
+    },
+    "2021": {
+      "auctions": 223.0,
+      "cover_median": 1.603,
+      "cover_q25": 1.446,
+      "cover_q75": 1.809,
+      "share_cover_below_1_5_pct": 32.735,
+      "bidders_mean": 23.309,
+      "successful_bidders_mean": 17.731,
+      "spread_median_pct": -0.073
+    },
+    "2022": {
+      "auctions": 213.0,
+      "cover_median": 2.2,
+      "cover_q25": 1.811,
+      "cover_q75": 2.46,
+      "share_cover_below_1_5_pct": 11.737,
+      "bidders_mean": 19.991,
+      "successful_bidders_mean": 14.653,
+      "spread_median_pct": 0.706
+    },
+    "2023": {
+      "auctions": 215.0,
+      "cover_median": 1.939,
+      "cover_q25": 1.761,
+      "cover_q75": 2.161,
+      "share_cover_below_1_5_pct": 7.442,
+      "bidders_mean": 20.358,
+      "successful_bidders_mean": 15.335,
+      "spread_median_pct": 0.047
+    },
+    "2024": {
+      "auctions": 213.0,
+      "cover_median": 1.664,
+      "cover_q25": 1.521,
+      "cover_q75": 1.797,
+      "share_cover_below_1_5_pct": 19.249,
+      "bidders_mean": 24.258,
+      "successful_bidders_mean": 18.103,
+      "spread_median_pct": -1.052
+    },
+    "2025": {
+      "auctions": 213.0,
+      "cover_median": 1.613,
+      "cover_q25": 1.495,
+      "cover_q75": 1.784,
+      "share_cover_below_1_5_pct": 27.23,
+      "bidders_mean": 24.131,
+      "successful_bidders_mean": 17.728,
+      "spread_median_pct": -0.271
+    },
+    "2026": {
+      "auctions": 200.0,
+      "cover_median": 1.566,
+      "cover_q25": 1.447,
+      "cover_q75": 1.745,
+      "share_cover_below_1_5_pct": 35.5,
+      "bidders_mean": 23.195,
+      "successful_bidders_mean": 17.07,
+      "spread_median_pct": 0.888
+    }
+  },
+  "all_auctions": {
+    "cover_median": 2.042,
+    "cover_min": 1.009,
+    "cover_max": 13.81,
+    "spread_median_pct": 0.492,
+    "spearman_cover_spread": 0.616,
+    "spearman_cover_bidders": -0.362
+  },
+  "mean_bid_above_price_by_5pct": {
+    "count": 4,
+    "auctions": [
+      {
+        "date": "2013-04-19",
+        "zone": "DE",
+        "price": 3.1,
+        "mean_bid": 3.27,
+        "max_bid": 5.0
+      },
+      {
+        "date": "2024-06-11",
+        "zone": "EU",
+        "price": 70.31,
+        "mean_bid": 137.3,
+        "max_bid": 7075.0
+      },
+      {
+        "date": "2024-09-23",
+        "zone": "EU",
+        "price": 64.0,
+        "mean_bid": 69.55,
+        "max_bid": 660.66
+      },
+      {
+        "date": "2026-10-05",
+        "zone": "EU",
+        "price": 82.6,
+        "mean_bid": 87.28,
+        "max_bid": 1000.0
+      }
+    ]
+  }
+}

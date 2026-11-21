@@ -1,0 +1,53 @@
+{
+  "rows_read": 3044,
+  "dropped_no_date": 0,
+  "dropped_by_contract": {
+    "EAA3": 81,
+    "T2PA": 64,
+    "EAA2": 1
+  },
+  "dropped_aviation_under_eua_code": 0,
+  "dropped_cancelled": 3,
+  "cancelled_dates": [
+    "2020-03-17",
+    "2022-02-01",
+    "2022-03-02"
+  ],
+  "dropped_missing_or_zero_values": 0,
+  "dropped_outside_window": {
+    "2012": 19
+  },
+  "dropped_duplicates": 0,
+  "cover_ratio_check": {
+    "max_abs_gap_vs_eex": 0.005,
+    "rows_gap_above_0.01": 0
+  },
+  "rows_kept": 2876,
+  "rows_kept_by_year": {
+    "2013": 202,
+    "2014": 194,
+    "2015": 195,
+    "2016": 187,
+    "2017": 201,
+    "2018": 203,
+    "2019": 208,
+    "2020": 209,
+    "2021": 223,
+    "2022": 213,
+    "2023": 215,
+    "2024": 213,
+    "2025": 213,
+    "2026": 200
+  },
+  "rows_kept_by_zone": {
+    "EU": 1949,
+    "DE": 636,
+    "PL": 285,
+    "XI": 6
+  },
+  "window": [
+    "2013-01-01",
+    "2026-11-20"
+  ],
+  "same_day_auctions": 14
+}

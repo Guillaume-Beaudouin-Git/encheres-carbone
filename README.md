@@ -13,8 +13,8 @@ from 7 January 2013 to 20 November 2026 (2,876 auctions):
 EEX publishes one spreadsheet per year (`.xls` until 2019, `.xlsx` since). EEX runs the common auction platform
 and the auctions of Germany, Poland and Northern Ireland; auctions held on other platforms are not in these files.
 The layout changes over the years: the header is on line 3 until 2016 and on line 6 from 2017, a status column
-appears in 2020, and the 2026 file names its sheet "EU ETS1". `src/eua_auctions/data.py` locates the header by its "Date" cell and maps every spelling of a
-column to one name.
+appears in 2020, and the 2026 file names its sheet "EU ETS1". `src/eua_auctions/data.py` locates the header by
+its "Date" cell and maps every spelling of a column to one name.
 
 | Rule | Rows |
 |---|---|
@@ -78,13 +78,13 @@ recomputed as total bids / volume and matches EEX's rounded figure on every row 
 - **Cover ratio** = total volume bid / volume offered. Below 1 the auction is cancelled (Article 7 of
   [Regulation (EU) 2023/2830](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023R2830)). The median
   peaks at 5.20 in 2014, the full year with the smallest volume offered, and falls to 1.57 in 2026, when 35.5% of
-  auctions clear with less than 1.5 times their volume bid. The ratio divides by the volume offered, so it moves
-  with supply as well as with demand.
+  auctions receive bids for less than 1.5 times the volume offered. The ratio divides by the volume offered: the
+  same bids give a higher ratio when less is offered.
 - **Bidders.** Between 16.5 (2014) and 25.2 (2018) bidders per auction on average; 23.2 in 2026. More bidders do
   not mean a higher cover: auction by auction, the rank correlation between the two is −0.36.
 - **Price − mean bid.** Bids above the clearing price are filled and bids below it are rejected, so a mean bid
   far below the clearing price means many low bids: wide dispersion. The median over all auctions is 0.49% of the
-  price, and the spread is wider when the cover is higher (rank correlation 0.62). EEX's mean includes erroneous
+  price, and the spread is larger when the cover is higher (rank correlation 0.62). EEX's mean includes erroneous
   bids: on 11 June 2024 one maximum bid of 7,075 EUR/t lifts the mean bid to 137.30 EUR/t for a clearing price of
   70.31 EUR/t. That is why the yearly figure is a median.
 
@@ -138,7 +138,7 @@ auction.
 - **No secondary-market price.** The usual demand indicator is the auction's discount to the secondary market; it
   needs secondary-market prices, which are not used here. The price changes in question 3 are between clearing
   prices, so they include each auction's own discount.
-- **The cover ratio depends on the volume offered**, which policy sets. The rank against the previous 60 auctions
+- **The cover ratio is relative to the volume offered**, which policy sets. The rank against the previous 60 auctions
   removes slow changes, not the gap between platforms: on 2014-2020 the median cover is 2.49 on the common
   platform and 2.10 for Poland.
 - **Causes are not separated.** The changes in volume are described, not decomposed into reserve intake,

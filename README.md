@@ -1,5 +1,11 @@
 # EU ETS auctions on EEX: supply, demand, and whether the cover ratio predicts prices
 
+> **In short.** 2,876 EU allowance auctions on EEX, 2013-2026. *Supply:* an August auction offered half the volume
+> of a July auction until 2023; the volume auctioned falls by 35% in 2014, the first year of backloading, and by 28%
+> in 2019, the first year of the Market Stability Reserve. *Demand:* the median cover ratio peaks at 5.20 in 2014 and
+> falls to 1.57 in 2026. *Test:* the out-of-sample test (variant chosen on 2014-2020, judged once on 2021-2026) finds
+> no evidence that the cover ratio predicts the next clearing prices (t = 0.92, p = 0.36).
+
 Three questions on the public results of the primary auctions of EU emission allowances (EUA) held on EEX,
 from 7 January 2013 to 20 November 2026 (2,876 auctions):
 

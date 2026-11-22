@@ -188,6 +188,8 @@ on 21 November 2026, not redistributed: `data/` is not versioned, and `scripts/d
 Only aggregates and charts computed from them are published, for non-commercial research. EEX's terms:
 https://www.eex.com/en/legal-information/disclaimer.
 
+The MIT licence covers the code only; `results/` and `figures/` are derived from EEX data (© EEX AG), see above.
+
 ## How this project was built
 
 The code was written by an AI coding agent (Claude Code) under the direction of the author, Guillaume Beaudouin.

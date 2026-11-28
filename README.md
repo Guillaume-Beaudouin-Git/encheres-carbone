@@ -4,7 +4,9 @@
 > of a July auction until 2023; the volume auctioned falls by 35% in 2014, the first year of backloading, and by 28%
 > in 2019, the first year of the Market Stability Reserve. *Demand:* the median cover ratio peaks at 5.20 in 2014 and
 > falls to 1.57 in 2026. *Test:* the out-of-sample test (variant chosen on 2014-2020, judged once on 2021-2026) finds
-> no evidence that the cover ratio predicts the next clearing prices (t = 0.92, p = 0.36).
+> no evidence that the cover ratio predicts the next clearing prices (t = 0.92, p = 0.36). A control for the auction
+> platform, chosen after these results, gives t = 1.98 (p = 0.047), and t = 0.19 without the 2022 auctions: one post
+> hoc test that rests on one year, so not evidence of an effect. The answer is undetermined.
 
 Three questions on the public results of the primary auctions of EU emission allowances (EUA) held on EEX,
 from 7 January 2013 to 20 November 2026 (2,876 auctions):
@@ -136,10 +138,47 @@ On 2014-2020, no variant is significant (largest |t| 1.26, every p above 0.2). T
 **Answer: no evidence, which is not evidence of no effect.** Neither on the years where it was chosen nor on the
 years where it was tested is there evidence that the cover ratio predicts the change in the clearing price over the
 next 1, 5 or 10 auctions. The test is imprecise: its 95% interval on 2021-2026, [−0.31%, +0.87%] per auction, does
-not rule out a difference of half a percent, a fifth of the typical change between two auctions (2.57%). One reading, not tested here: the results of an
-auction are public on the day, and the secondary market prices them before the next auction.
+not rule out a difference of half a percent, a fifth of the typical change between two auctions (2.57%). A control
+for the platform, chosen after these results (below), moves t from 0.92 to 1.98, and to 0.19 without 2022: it does
+not turn this answer into evidence of an effect, and it shows that the answer depends on the specification. One
+reading, not tested here: the results of an auction are public on the day, and the secondary market prices them
+before the next auction.
 
 ![High minus low cover, 9 variants, 2014-2020 and 2021-2026](figures/Q3_cover_signal_test.png)
+
+### Post hoc: the chosen test with a control for the platform (added 28 November 2026)
+
+**Not part of the design: this test was chosen on 28 November 2026, after all the results above had been seen.**
+The design pools the four platforms in one series. On 2021-2026, 56% of the high-cover auctions of the chosen
+variant are German, against 6% of the low-cover ones, and a German auction does not clear at the level of the next
+auction. This one test adds a dummy for the platform of auction t (the common platform is the base) to the chosen
+variant, with the same target and the same Newey-West errors. Code: `src/eua_auctions/platform_control.py`, run by
+`scripts/platform_control.py`, numbers in `results/platform_control.json`; `cover_signal.py` and its results are
+unchanged.
+
+| chosen variant (k = 1, q = 0.1) | 2014-2020 (choice) | 2021-2026 (test) |
+|---|---|---|
+| high − low, design (above) | +0.42%, t = 1.26 | +0.28%, t = 0.92, p = 0.36 |
+| high − low, with platform dummies | +0.39%, t = 1.15 | +0.63% [+0.01, +1.26], t = 1.98, p = 0.047 |
+| German platform dummy | −0.37%, t = −1.79 | −0.68%, t = −3.41 |
+
+- **What the control does.** After a German auction, the change to the next clearing price is 0.68% lower than
+  after an auction on the common platform in the same cover bucket (2021-2026). German auctions weigh far more in
+  the high-cover bucket than in the low one, so the design's high − low carried this gap against high cover: here
+  the platform gap lowered the measured difference (+0.28% without the control, +0.63% with it) rather than raised
+  it.
+- **It rests on one year.** Without the auctions of 2022, the controlled test gives +0.06%, t = 0.19 (p = 0.85);
+  without any other single year, t stays between 1.67 and 2.98 (the estimate between +0.61% and +1.04%; p above 0.05
+  without 2023, 2025 or 2026). In 2022 alone, the design's high − low, without the control, is +2.54% (31 high-cover
+  and 25 low-cover auctions). When a year is left out, the auctions on either side of it are treated as neighbours by
+  the Newey-West errors.
+- **The other variants, with the same control** (2021-2026, for transparency only): one other has p below 0.05,
+  k = 5, q = 0.1 (+1.96%, t = 2.25, p = 0.024); the other seven do not. None is below the Bonferroni threshold of
+  0.0056 for 9 tries, and these are no longer the first 9 tries on these years.
+- **What it changes, and what it does not.** It does not show that the cover ratio predicts prices: it is one test
+  chosen after the results, and it rests on 2022. It shows that the design's "no evidence" depends on the
+  specification: with a control a reader would naturally try, the same test sits at p = 0.047. Whether the cover
+  ratio predicts the next clearing price stays undetermined.
 
 ## Limitations
 
@@ -152,9 +191,10 @@ auction are public on the day, and the secondary market prices them before the n
   platform and 2.10 for Poland.
 - **The cover rank also tracks the volume offered:** August auctions are 29% of the high-cover bucket of the
   chosen variant (9% of all auctions, 2014-2026); on 2021-2026, German auctions are 56% of it (21% of all). This
-  was measured after the test, as a description (`results/cover_signal.json`). The test does not control for the
-  platform: a gap in clearing level between platforms enters the measured difference, and can hide a signal as well
-  as create one.
+  was measured after the test, as a description (`results/cover_signal.json`). The designed test does not control
+  for the platform: a gap in clearing level between platforms enters the measured difference, and can hide a signal
+  as well as create one. The post hoc control at the end of question 3 finds that here the gap lowers the
+  measured difference (+0.28% without the control, +0.63% with it), on a result that rests on 2022.
 - **"k auctions ahead" is not a fixed length of time.** Successive auctions are a day apart most of the time, but
   several days apart across a weekend and several weeks apart across the year-end break; the test treats all these
   changes alike.
@@ -173,6 +213,7 @@ uv run python scripts/clean.py          # cleaning report
 uv run python scripts/supply.py         # question 1
 uv run python scripts/demand.py         # question 2
 uv run python scripts/cover_signal.py   # question 3
+uv run python scripts/platform_control.py   # question 3, the post hoc platform control
 uv run pytest
 ```
 
@@ -186,14 +227,16 @@ The numbers are written to `results/` and the figures to `figures/`.
 | `src/eua_auctions/supply.py` | monthly and yearly volumes, August against July |
 | `src/eua_auctions/demand.py` | cover ratio, bidders and price − mean bid by year |
 | `src/eua_auctions/cover_signal.py` | trailing rank, forward changes, the training choice, HAC tests, forecast comparison |
-| `scripts/` | one script per question, plus download and cleaning |
-| `tests/` | hand-computable cases: cleaning on a hand-built sheet, rank and forward change by hand, and two tests that the training choice never sees the test years |
+| `src/eua_auctions/platform_control.py` | the post hoc platform control of question 3, added after the results |
+| `scripts/` | one script per question, plus download, cleaning and the post hoc control |
+| `tests/` | hand-computable cases: cleaning on a hand-built sheet, rank and forward change by hand, two tests that the training choice never sees the test years, and the platform control on hand-built cases |
 
 ## Data and terms of use
 
 The data are EEX's "EUA Emission Spot Primary Market Auction Report" files, published on the
 [EEX auctions page](https://www.eex.com/en/markets/environmental-markets/eu-ets-auctions). © EEX AG. Files downloaded
-on 21 November 2026, not redistributed: `data/` is not versioned, and `scripts/download.py` fetches them from EEX.
+on 21 November 2026 and again on 28 November 2026 (same figures), not redistributed: `data/` is not versioned, and
+`scripts/download.py` fetches them from EEX.
 Only aggregates and charts computed from them are published, for non-commercial research. EEX's terms:
 https://www.eex.com/en/legal-information/disclaimer.
 

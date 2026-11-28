@@ -1,0 +1,241 @@
+{
+  "note": "Post hoc, not part of the design: chosen on 28 November 2026 after all results had been seen. The chosen variant with one dummy per platform of auction t (base: the common platform), same target and same HAC errors. cover_signal.py and results/cover_signal.json are unchanged.",
+  "added": "2026-11-28",
+  "chosen": {
+    "k": 1,
+    "q": 0.1
+  },
+  "hac_lags": 2,
+  "base_platform": "EU",
+  "test_2021_2026": {
+    "n": 1276,
+    "n_low": 175,
+    "n_high": 149,
+    "high_minus_low": 0.6327,
+    "se_hac": 0.3189,
+    "t_hac": 1.9838,
+    "p_hac": 0.0473,
+    "ci95": [
+      0.0076,
+      1.2579
+    ],
+    "platforms": {
+      "DE": {
+        "n": 271,
+        "coef": -0.6752,
+        "t_hac": -3.412
+      },
+      "PL": {
+        "n": 165,
+        "coef": -0.1596,
+        "t_hac": -0.7767
+      },
+      "XI": {
+        "n": 6,
+        "coef": -0.95,
+        "t_hac": -0.8911
+      }
+    },
+    "n_base_platform": 834
+  },
+  "train_2014_2020": {
+    "n": 1396,
+    "n_low": 194,
+    "n_high": 163,
+    "high_minus_low": 0.387,
+    "se_hac": 0.3368,
+    "t_hac": 1.1488,
+    "p_hac": 0.2506,
+    "ci95": [
+      -0.2733,
+      1.0472
+    ],
+    "platforms": {
+      "DE": {
+        "n": 318,
+        "coef": -0.3721,
+        "t_hac": -1.7871
+      },
+      "PL": {
+        "n": 106,
+        "coef": -0.0387,
+        "t_hac": -0.1155
+      }
+    },
+    "n_base_platform": 972
+  },
+  "test_leave_one_year_out": {
+    "2021": {
+      "n_left_out": 223,
+      "n_high_year": 23,
+      "n_low_year": 33,
+      "raw_high_minus_low_year": -0.5725,
+      "without_year": {
+        "n": 1053,
+        "high_minus_low": 1.0421,
+        "se_hac": 0.3492,
+        "t_hac": 2.9845,
+        "p_hac": 0.0028
+      }
+    },
+    "2022": {
+      "n_left_out": 213,
+      "n_high_year": 31,
+      "n_low_year": 25,
+      "raw_high_minus_low_year": 2.5373,
+      "without_year": {
+        "n": 1063,
+        "high_minus_low": 0.0572,
+        "se_hac": 0.2933,
+        "t_hac": 0.1949,
+        "p_hac": 0.8455
+      }
+    },
+    "2023": {
+      "n_left_out": 215,
+      "n_high_year": 26,
+      "n_low_year": 40,
+      "raw_high_minus_low_year": 0.2087,
+      "without_year": {
+        "n": 1061,
+        "high_minus_low": 0.6387,
+        "se_hac": 0.3835,
+        "t_hac": 1.6652,
+        "p_hac": 0.0959
+      }
+    },
+    "2024": {
+      "n_left_out": 213,
+      "n_high_year": 21,
+      "n_low_year": 24,
+      "raw_high_minus_low_year": -0.7984,
+      "without_year": {
+        "n": 1063,
+        "high_minus_low": 0.7797,
+        "se_hac": 0.3404,
+        "t_hac": 2.2904,
+        "p_hac": 0.022
+      }
+    },
+    "2025": {
+      "n_left_out": 213,
+      "n_high_year": 27,
+      "n_low_year": 26,
+      "raw_high_minus_low_year": 0.0388,
+      "without_year": {
+        "n": 1063,
+        "high_minus_low": 0.639,
+        "se_hac": 0.3628,
+        "t_hac": 1.7611,
+        "p_hac": 0.0782
+      }
+    },
+    "2026": {
+      "n_left_out": 199,
+      "n_high_year": 21,
+      "n_low_year": 27,
+      "raw_high_minus_low_year": 0.0214,
+      "without_year": {
+        "n": 1077,
+        "high_minus_low": 0.6118,
+        "se_hac": 0.3413,
+        "t_hac": 1.7926,
+        "p_hac": 0.073
+      }
+    }
+  },
+  "test_9_variants_with_control": [
+    {
+      "k": 1,
+      "q": 0.1,
+      "n": 1276,
+      "high_minus_low": 0.6327,
+      "t_hac": 1.9838,
+      "p_hac": 0.0473
+    },
+    {
+      "k": 1,
+      "q": 0.2,
+      "n": 1276,
+      "high_minus_low": 0.2139,
+      "t_hac": 0.8818,
+      "p_hac": 0.3779
+    },
+    {
+      "k": 1,
+      "q": 0.3,
+      "n": 1276,
+      "high_minus_low": 0.1558,
+      "t_hac": 0.7715,
+      "p_hac": 0.4404
+    },
+    {
+      "k": 5,
+      "q": 0.1,
+      "n": 1272,
+      "high_minus_low": 1.9638,
+      "t_hac": 2.2526,
+      "p_hac": 0.0243
+    },
+    {
+      "k": 5,
+      "q": 0.2,
+      "n": 1272,
+      "high_minus_low": 0.7256,
+      "t_hac": 1.0463,
+      "p_hac": 0.2954
+    },
+    {
+      "k": 5,
+      "q": 0.3,
+      "n": 1272,
+      "high_minus_low": 0.5885,
+      "t_hac": 0.9492,
+      "p_hac": 0.3425
+    },
+    {
+      "k": 10,
+      "q": 0.1,
+      "n": 1267,
+      "high_minus_low": 1.9621,
+      "t_hac": 1.4601,
+      "p_hac": 0.1443
+    },
+    {
+      "k": 10,
+      "q": 0.2,
+      "n": 1267,
+      "high_minus_low": 0.3651,
+      "t_hac": 0.3453,
+      "p_hac": 0.7299
+    },
+    {
+      "k": 10,
+      "q": 0.3,
+      "n": 1267,
+      "high_minus_low": 0.3681,
+      "t_hac": 0.3961,
+      "p_hac": 0.692
+    }
+  ],
+  "test_platform_share_by_bucket_pct": {
+    "low": {
+      "DE": 6.2857,
+      "EU": 81.1429,
+      "PL": 12.5714,
+      "XI": 0.0
+    },
+    "mid": {
+      "DE": 18.5924,
+      "EU": 68.1723,
+      "PL": 12.9202,
+      "XI": 0.3151
+    },
+    "high": {
+      "DE": 55.7047,
+      "EU": 28.8591,
+      "PL": 13.4228,
+      "XI": 2.0134
+    }
+  }
+}

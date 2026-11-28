@@ -152,7 +152,12 @@ auction are public on the day, and the secondary market prices them before the n
   platform and 2.10 for Poland.
 - **The cover rank also tracks the volume offered:** August auctions are 29% of the high-cover bucket of the
   chosen variant (9% of all auctions, 2014-2026); on 2021-2026, German auctions are 56% of it (21% of all). This
-  was measured after the test, as a description (`results/cover_signal.json`).
+  was measured after the test, as a description (`results/cover_signal.json`). The test does not control for the
+  platform: a gap in clearing level between platforms enters the measured difference, and can hide a signal as well
+  as create one.
+- **"k auctions ahead" is not a fixed length of time.** Successive auctions are a day apart most of the time, but
+  several days apart across a weekend and several weeks apart across the year-end break; the test treats all these
+  changes alike.
 - **Causes are not separated.** The changes in volume are described, not decomposed into reserve intake,
   backloading or other policy decisions.
 - **2026 is partial**, and the 2026 file grows after each auction: the window stops at 20 November 2026, and rows

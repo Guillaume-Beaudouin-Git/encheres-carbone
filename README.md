@@ -135,8 +135,8 @@ On 2014-2020, no variant is significant (largest |t| 1.26, every p above 0.2). T
 
 **Answer: no evidence, which is not evidence of no effect.** Neither on the years where it was chosen nor on the
 years where it was tested is there evidence that the cover ratio predicts the change in the clearing price over the
-next 1, 5 or 10 auctions. The test is imprecise: its 95% interval on 2021-2026, [−0.31, +0.87] per auction, does
-not rule out a difference of half a percent, which would matter. One reading, not tested here: the results of an
+next 1, 5 or 10 auctions. The test is imprecise: its 95% interval on 2021-2026, [−0.31%, +0.87%] per auction, does
+not rule out a difference of half a percent, a fifth of the typical change between two auctions (2.57%). One reading, not tested here: the results of an
 auction are public on the day, and the secondary market prices them before the next auction.
 
 ![High minus low cover, 9 variants, 2014-2020 and 2021-2026](figures/Q3_cover_signal_test.png)

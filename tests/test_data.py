@@ -75,3 +75,23 @@ def test_clean_drops_cancelled_auctions():
     kept, report = clean(df, start="2020-01-01", end="2020-12-31")
     assert report["dropped_cancelled"] == 1 and report["cancelled_dates"] == ["2020-03-17"]
     assert len(kept) == 1
+
+
+def test_rows_after_the_window_are_not_counted_anywhere():
+    # the current year's file grows after every auction: the report must not depend on the day of the download
+    rows = [_row("2020-03-16", "T3PA", 20.0, 2_000_000, 4_000_000), _row("2020-03-17", "T3PA", np.nan, 2_000_000, 1_900_000)]
+    later = [_row("2021-01-05", "T3PA", 30.0, 2_000_000, 4_000_000), _row("2021-01-06", "T3PA", np.nan, 2_000_000, 1_900_000)]
+    status = ["successful", "cancelled"]
+
+    def run(r, st):
+        df = tidy_sheet(_sheet_2013_layout(r))
+        df["status"] = st
+        df["source"] = "hand-built"
+        return clean(df, start="2020-01-01", end="2020-12-31")
+
+    kept, report = run(rows, status)
+    kept_later, report_later = run(rows + later, status + status)
+    assert report_later == report
+    assert report["rows_read"] == 2 and report["dropped_cancelled"] == 1 and report["dropped_outside_window"] == {}
+    pd.testing.assert_frame_equal(kept_later, kept)
+

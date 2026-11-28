@@ -24,7 +24,7 @@ its "Date" cell and maps every spelling of a column to one name.
 
 | Rule | Rows |
 |---|---|
-| Rows read from the 15 files (2012-2026) | 3,044 |
+| Rows read from the 15 files (2012-2026), up to the end of the window, 20 November 2026 | 3,044 |
 | Phase-2 EUAs (contract `T2PA`), 3 January 2012 to 25 April 2013 | −64 |
 | Aviation allowances (1 `EAA2`, 81 `EAA3`, the last on 11 December 2024). Since January 2025, aviation allowances are sold within the EUA auctions ([EEX customer information, 31 July 2024](https://eex.com/fileadmin/Global/News/EEX/EEX_Customer_Information/2024/20240731_CI_Auction_Calendar_revised_2024_and_2025.pdf)) | −82 |
 | Cancelled auctions (17 March 2020, 1 February 2022, 2 March 2022) | −3 |
@@ -153,7 +153,9 @@ auction.
   was measured after the test, as a description (`results/cover_signal.json`).
 - **Causes are not separated.** The changes in volume are described, not decomposed into reserve intake,
   backloading or other policy decisions.
-- **2026 is partial**, and the 2026 file grows after each auction: the window stops at 20 November 2026.
+- **2026 is partial**, and the 2026 file grows after each auction: the window stops at 20 November 2026, and rows
+  dated after it are left out before any count, so that a later download gives the same figures unless EEX revises
+  a row already published.
 
 ## Reproduce
 

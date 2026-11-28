@@ -40,7 +40,8 @@ EUA_CONTRACT = "T3PA"
 SHEETS = ("Primary Market Auction", "EU ETS1")
 
 # Analysis window: phase 3 starts on 1 January 2013. The 2026 file grows after every auction, so the window is
-# fixed at the last auction in the file used for this page; a later download gives the same numbers.
+# fixed at the last auction in the file used for this page, and rows dated after it are left out before any count
+# (see clean): a later download gives the same numbers, unless EEX revises a row already published.
 START, END = "2013-01-01", "2026-11-20"
 
 
@@ -185,10 +186,16 @@ def _time_of_day(value: object) -> pd.Timedelta:
 
 
 def clean(df: pd.DataFrame, start: str = START, end: str = END) -> tuple[pd.DataFrame, dict]:
-    """One row per successful EUA auction in [start, end], sorted by time, and a report of every rule applied."""
-    report: dict = {"rows_read": int(len(df))}
+    """One row per successful EUA auction in [start, end], sorted by time, and a report of every rule applied.
+
+    `rows_read` counts the rows dated up to `end` (and the rows without a date); later rows are ignored."""
     df = df.copy()
     df["date"] = pd.to_datetime(df["date"], errors="coerce").dt.normalize()  # 2016 dates carry 09:00
+    # Rows dated after the end of the window are not counted anywhere in the report: the current year's file grows
+    # after every auction, and the report must not change with the day of the download.
+    after_end = df["date"] > pd.Timestamp(end)
+    df = df[~after_end]
+    report: dict = {"rows_read": int(len(df))}
     n = len(df)
     df = df[df["date"].notna()]
     report["dropped_no_date"] = int(n - len(df))

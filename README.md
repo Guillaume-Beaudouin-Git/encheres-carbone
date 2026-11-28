@@ -100,7 +100,8 @@ recomputed as total bids / volume and matches EEX's rounded figure on every row 
 ## 3. Does the cover ratio announce the next price moves?
 
 **Design, committed in `ce81313`, before the results commit `87593fa`** (see
-`src/eua_auctions/cover_signal.py`, unchanged since):
+`src/eua_auctions/cover_signal.py`, unchanged since). The two commits are six minutes apart, and the first already
+holds the script that runs the test: the order is a commitment, not proof that no test-year result had been seen.
 
 - Signal: the rank of an auction's cover ratio among the previous 60 auctions. The median cover falls from 5.20
   (2014) to 1.76 (2020) inside the training years, so fixed thresholds on the raw ratio would mostly sort auctions

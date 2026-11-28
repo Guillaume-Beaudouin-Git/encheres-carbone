@@ -201,5 +201,7 @@ The MIT licence covers the code only; `results/` and `figures/` are derived from
 
 ## How this project was built
 
-The code was written by an AI coding agent (Claude Code) under the direction of the author, Guillaume Beaudouin.
+I create and manage AI coding agents that write and review the code; I set the objective and the validation rules,
+and decide what is kept. The agents are Claude Code sessions.
+
 Every number on this page is produced by the scripts above.
